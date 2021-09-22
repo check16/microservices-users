@@ -2,41 +2,10 @@ package com.formacionbdi.microservicios.app.usuarios.services;
 
 import com.formacionbdi.microservicios.app.usuarios.models.entity.Alumno;
 import com.formacionbdi.microservicios.app.usuarios.models.repository.AlumnoRepository;
+import com.formacionbdi.microservicios.commons.services.CommonServiceImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
-public class AlumnoServiceImpl implements AlumnoService {
+public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepository> implements AlumnoService {
 
-    private final AlumnoRepository repository;
-
-    public AlumnoServiceImpl(AlumnoRepository repository) {
-        this.repository = repository;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Iterable<Alumno> findAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Alumno> findById(Long id) {
-        return repository.findById(id);
-    }
-
-    @Override
-    @Transactional
-    public Alumno save(Alumno alumno) {
-        return repository.save(alumno);
-    }
-
-    @Override
-    @Transactional
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
 }

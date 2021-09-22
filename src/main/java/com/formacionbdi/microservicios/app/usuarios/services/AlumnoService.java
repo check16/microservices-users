@@ -1,8 +1,8 @@
 package com.formacionbdi.microservicios.app.usuarios.services;
 
 import com.formacionbdi.microservicios.app.usuarios.models.entity.Alumno;
+import com.formacionbdi.microservicios.commons.services.CommonService;
 
-import java.util.Optional;
+public interface AlumnoService extends CommonService<Alumno> {
 
-public interface AlumnoService extends BaseService<Alumno> {
 }
