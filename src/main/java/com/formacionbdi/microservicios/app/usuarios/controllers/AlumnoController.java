@@ -5,15 +5,20 @@ import com.formacionbdi.microservicios.commons.alumnos.models.entity.Alumno;
 import com.formacionbdi.microservicios.commons.controllers.CommonController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
 public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@RequestBody Alumno alumno, @PathVariable Long id) {
+    public ResponseEntity<?> editar(@Valid @RequestBody Alumno alumno, BindingResult result, @PathVariable Long id) {
+        if (result.hasErrors()) {
+            return this.validar(result);
+        }
         Optional<Alumno> optionalAlumno = service.findById(id);
         if (optionalAlumno.isEmpty()) {
             return ResponseEntity.notFound()
